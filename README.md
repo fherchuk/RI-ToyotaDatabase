@@ -1,3 +1,6 @@
+![](https://img.shields.io/badge/created-november%202022-blue)
+![GitHub last commit](https://img.shields.io/github/last-commit/fherchuk/CSC436-Database-Project)
+
 # CSC436-Database-Project
 A short description about the script must be mentioned here.
 
@@ -15,7 +18,7 @@ Steps on how to run the script along with suitable examples.
 <!--Remove the below lines and add yours -->
 Add a jpeg/png/gif file here.
 
-## *Author Name*
+## *Author*
 <!--Remove the below lines and add yours -->
-Frederick Herchuk
+#### *Frederick Herchuk* ([GitHub](https://github.com/fherchuk))
 If you have a web site or a Git user name, feel free to link.
