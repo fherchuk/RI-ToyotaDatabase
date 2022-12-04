@@ -17,5 +17,5 @@ Add a jpeg/png/gif file here.
 
 ## *Author Name*
 <!--Remove the below lines and add yours -->
-The name of the author of the code goes here.
+Frederick Herchuk
 If you have a web site or a Git user name, feel free to link.
