@@ -1,5 +1,22 @@
+import tkinter
 from tkinter import *
+from tkinter import ttk
+from turtle import heading
+
+
 root = Tk()
+root.title = ("Database")
+root.geometry("600x800")
+
+
+ 
+
+
+
+
+
+
+
 class myButton:
     def __init__(self, name, entry, row, col):
         self.name = name
@@ -16,10 +33,41 @@ class myButton:
             myLabel = Label(root, text="clicked "+self.entry.get())
         myLabel.grid(row=3, column=1)
 
+class Table:
+    def __init__(self, size, values):
+        self.size = size
+        self.values = values
+        self.frame = Frame(root)
+        self.tv = ttk.Treeview(self.frame, columns=(1,2,3), show="headings", height = "20")
+        self.heading(), self.scroll(), self.display()
+        self.frame.grid(row = 10, column = 5)
+        self.tv.grid(row = 10, column = 5, sticky='nsew')
+
+    def heading(self):
+        self.tv.heading(1, text="Year")
+        self.tv.heading(2, text="Make")
+        self.tv.heading(3, text="Model")
+
+    def scroll(self):
+        scrollbar = ttk.Scrollbar(root, orient = tkinter.VERTICAL, command=self.tv.yview)
+        self.tv.configure(yscroll=scrollbar.set)
+        scrollbar.grid(row=10, column=10, sticky='ns')
+
+
+    def display(self):
+        data = []
+        for n in range(1, 100):
+            year = (n+2000)
+            data.append(({year},f'Toyota',f'Supra' ))
+
+        for contact in data:
+            self.tv.insert('', tkinter.END, values=contact)
+
 
 
 
 def main():
+
 
     
     entry = Entry(root, width=30, borderwidth=5)
@@ -30,6 +78,9 @@ def main():
     update = myButton("Update", entry, 2, 1)
     delete = myButton("Delete", entry, 1, 2)
     order = myButton("Order", entry, 2, 2)
+    table = Table(5, 5)
+
+
 
     
 
