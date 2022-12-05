@@ -1,6 +1,6 @@
-import mysql.connector
+# import mysql.connector
 
-db = mysql.connector.connect()
+#db = mysql.connector.connect()
 
 class my_class(object):
     pass
