@@ -1,4 +1,5 @@
 import tkinter
+import sql
 from tkinter import *
 from tkinter import ttk
 from turtle import color, heading, width
@@ -82,7 +83,7 @@ class Table:
 
 
 
-def main():
+def initialize():
 
 
     
@@ -100,14 +101,4 @@ def main():
     table_label = MyLabel("Select Table", 10, 1)
     table_drop = DropBox(["Vehicles", "Customer", "Sales Representatives", "Sales", "RI Toyota"], 10, 2)
 
-
-
-
-
-    
-
-
-if __name__ == '__main__':
-    main()
-
-root.mainloop()
+    root.mainloop()
