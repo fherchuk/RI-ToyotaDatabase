@@ -28,3 +28,5 @@ If you have a web site or a Git user name, feel free to link.
 <!--MARKDOWN BADGES-->
 [MySQL.js]: https://img.shields.io/badge/mysql-ffead5?style=for-the-badge&logo=mysql&logoColor=4479A1
 [MySQL-url]: https://www.mysql.com/
+[sqalchemy-js]: https://quintagroup.com/cms/python/images/sqlalchemy-logo.png/image_view_fullscreen
+[sqalchemy-url]: https://www.mysql.com/
