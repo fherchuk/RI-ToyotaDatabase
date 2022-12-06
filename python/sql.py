@@ -9,10 +9,9 @@ class Error(Exception):
 class NotFoundInTableException(Error):
     pass
 
-def select(table, attributes):
-    attributeString = ','.join(map(str,attributes))
+def selectAll(table):
     values = []
-    mycursor.execute("SELECT "+attributeString+" FROM "+table)
+    mycursor.execute("SELECT * FROM "+table)
     for i in mycursor:
         values.append(i)
     return values
