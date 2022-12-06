@@ -9,6 +9,8 @@ A short description about the script must be mentioned here.
 Modules required to be able to use the script successfully
 and how to install them.
 (Including a `requirements.txt` file will work.)
+### Built With
+* [![MySQL][MySQL.js]][MySQL-url]
 
 ### How to run the script
 <!--Remove the below lines and add yours -->
@@ -22,3 +24,7 @@ Add a jpeg/png/gif file here.
 <!--Remove the below lines and add yours -->
 #### *Frederick Herchuk* ([GitHub](https://github.com/fherchuk))
 If you have a web site or a Git user name, feel free to link.
+
+<!--MARKDOWN BADGES-->
+[MySQL.js]: https://img.shields.io/badge/mysql-ffead5?style=for-the-badge&logo=mysql&logoColor=4479A1
+[MySQL-url]: https://www.mysql.com/
