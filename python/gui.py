@@ -40,18 +40,19 @@ class Table:
         self.values = values
         self.frame = Frame(root)
         self.name = ""
-        self.tv = ttk.Treeview(self.frame, columns= headers, show="headings", height = "20")
+        self.tv = ttk.Treeview(self.frame, columns= headers, show="headings", height = "38")
         self.style = ttk.Style()
         self.style.theme_use('clam')
-        self.style.configure('Treeview', rowheight=30, font = 10)
         self.heading(), self.scroll()
 
         ##SELECTION ITEMS##
         self.tablebox = MenuBox(["Vehicles", "Customer", "Sales Representatives", "Sales", "RI Toyota"], 10, 2, 20)
         self.headerbox = MenuBox(self.headers,15,0,20)
-        self.comparison_tablebox = MenuBox(["=",">","<",">=","<="], 15, 1, 2)
+        self.comparison_tablebox = MenuBox(["=","!=",">","<",">=","<="], 15, 1, 2)
         self.comparison_tablebox.drop.config(font = 8)
         self.entry = EntryBox(15,2)
+
+
     def heading(self):
         self.style.configure('Treeview.Heading', background= "lightblue2")
         self.tv['columns'] = (self.headers)
@@ -86,15 +87,23 @@ class Table:
         self.display(sql.selectAll(self.name))
         self.headerbox.update(self.headers)
     def clickBtn(self, name):
+        entryString = "'"+self.entry.entry.get()+"'"
+       
         if name == "Select":
-            entryString = "'"+self.entry.entry.get()+"'"
             self.display(sql.select("*",table.name,[self.headerbox.selection.get(),self.comparison_tablebox.selection.get(),entryString]))
+            myLabel = Label(root, text="clicked "+self.entry.entry.get())
+            myLabel.grid(row=17, column=1)
+        elif name == "Delete":
+            sql.delete(table.name,self.headerbox.selection.get(),entryString)
+            self.clickMenu()
+            myLabel = Label(root, text="Deleted "+self.entry.entry.get())
+            myLabel.grid(row=17, column=1)
         elif name == "Update":
             myLabel = Label(root, text="updated "+self.entry.get())
         elif name == "Select Table":
             self.clickMenu()
         else:
-            myLabel = Label(root, text="clicked "+self.entry.get())
+            myLabel = Label(root, text="clicked "+self.entry.entry.get())
             myLabel.grid(row=3, column=1)
     def display(self, val):
         self.clear_all()
@@ -144,7 +153,7 @@ def initialize():
     
 
     entryLabel = MyLabel("Enter Here:",0, 0)
-
+    delete = MyButton("Delete", table.entry, 16, 1)
     selectbtn = MyButton("Select", table.entry, 16, 2)
     select_table = MyButton("Select Table", "", 10, 4,)
 
