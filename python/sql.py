@@ -16,10 +16,11 @@ def selectAll(table):
         values.append(i)
     return values
 
-def select(table, attributes, conditions):
-    attributeString = ','.join(map(str,attributes))
+def select(con_attributes, table ,conditions):
+    conditionString = ' '.join(map(str, conditions))
     values = []
-    mycursor.execute("SELECT "+attributeString+" FROM "+table+" WHERE "+conditions)
+    print("SELECT "+con_attributes+" FROM "+table+" WHERE "+conditionString)
+    mycursor.execute("SELECT "+con_attributes+" FROM "+table+" WHERE "+conditionString)
     for i in mycursor:
         values.append(i)
     return values
