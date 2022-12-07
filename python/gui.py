@@ -40,11 +40,12 @@ class Table:
         self.values = values
         self.frame = Frame(root)
         self.name = ""
-        self.tv = ttk.Treeview(self.frame, columns= headers, show="headings", height = "30")
+        self.tv = ttk.Treeview(self.frame, columns= headers, show="headings", height = "20")
         self.style = ttk.Style()
         self.style.theme_use('clam')
+        self.style.configure('Treeview', rowheight=30, font = 10)
         self.heading(), self.scroll()
-        
+
         ##SELECTION ITEMS##
         self.tablebox = MenuBox(["Vehicles", "Customer", "Sales Representatives", "Sales", "RI Toyota"], 10, 2, 20)
         self.headerbox = MenuBox(self.headers,15,0,20)
@@ -59,27 +60,27 @@ class Table:
         for i in self.headers:
             self.tv.column(i, anchor=CENTER, width = (1000//len(self.headers)))
             self.tv.heading(i, text=i, anchor=CENTER)
-        self.frame.grid(row = 10, column = 7, rowspan= 40)
-        self.tv.grid(row = 10, column = 7, rowspan= 40, sticky='nsew')
+        self.frame.grid(row = 10, column = 7, rowspan= 20)
+        self.tv.grid(row = 10, column = 7, rowspan= 20, sticky='nsew')
     def scroll(self):
         scrollbar = ttk.Scrollbar(root, orient = tkinter.VERTICAL, command=self.tv.yview)
         self.tv.configure(yscroll=scrollbar.set)
-        scrollbar.grid(row=10, column=10, rowspan=40, sticky='ns')
+        scrollbar.grid(row=10, column=10, rowspan=120, sticky='ns')
     def clickMenu(self):
         if self.tablebox.selection.get() == "Vehicles":
             self.headers=["VIN","Year","Make","Model","Color"]
             self.name="vehicles"
         elif self.tablebox.selection.get() == "Customer":
-            self.headers=["Customer ID", "Phone", "Insurance", "License", "Name"]
+            self.headers=["ID", "Name", "Phone", "Insurance"]
             self.name="customer"
         elif self.tablebox.selection.get() == "Sales Representatives":
-            self.headers=["Employee ID", "Name", "Phone"]
+            self.headers=["ID", "Name", "Phone"]
             self.name="sales_rep"
         elif self.tablebox.selection.get() == "Sales":
-            self.headers=["Sale ID", "Sale Date"]
+            self.headers=["ID", "Date"]
             self.name="sales"
         elif self.tablebox.selection.get() == "RI Toyota":
-            self.headers=["Location Number", "City", "Phone"]
+            self.headers=["Location", "City", "Phone"]
             self.name="ri_toyota"
         self.heading()
         self.display(sql.selectAll(self.name))
