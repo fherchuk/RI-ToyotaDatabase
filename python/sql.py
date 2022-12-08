@@ -1,7 +1,7 @@
 from asyncio.windows_events import NULL
 from logging import exception
 import mysql.connector
-db = mysql.connector.connect(host='localhost', password= 'default', user= 'root', database = 'toyota')
+db = mysql.connector.connect(host='localhost', password= 'ebviking07', user= 'root', database = 'toyota')
 mycursor = db.cursor()
 
 class Error(Exception):
@@ -34,7 +34,11 @@ def insert(table, attributes, values):
     valuesString = ','.join(map(str,stringFormatting))
     print("INSERT INTO "+table+" ("+attributeString+") VALUES ("+(valuesString)+")",(values))
     try:
+        # set foreign key checks to 0 in order to insert to table
+        mycursor.execute("SET FOREIGN_KEY_CHECKS = 0;")
         mycursor.execute("INSERT INTO "+table+" ("+attributeString+") VALUES ("+(valuesString)+")",(values))
+        # enable foreign key checks after item is inserted into table
+        mycursor.execute("SET FOREIGN_KEY_CHECKS = 1;")
         db.commit()
     except:
         print("Already Exists")
@@ -59,12 +63,17 @@ def view(viewname,con_attributes, table ,conditions):
     return values
 
 def delete(table, key, value):
+    
 
     try:
+        # set foreign key checks to 0 in order to delete from table
+        mycursor.execute("SET FOREIGN_KEY_CHECKS = 0;")
         print("DELETE FROM "+table+" WHERE "+key+" = "+value+";")
         check(table, key, value)
         print("DELETE FROM "+table+" WHERE "+key+" = "+value+";")
         mycursor.execute("DELETE FROM "+table+" WHERE "+key+" = "+value+";")
+        # enable foreign key checks after items deleted
+        mycursor.execute("SET FOREIGN_KEY_CHECKS = 1;")
         db.commit()
 
     except NotFoundInTableException:
@@ -81,9 +90,10 @@ def check(table, key, value):
     for x in myresult:
         print(x)
 
-def create_index(db, table, column):
-    query = "CREATE INDEX {column}_index ON {table} ({column}).format(table=table, column=column)
-    mycursor.execute(query)
+# comment out "create index" to avoid errors on compile
+# def create_index(db, table, column):
+    # query = "CREATE INDEX {column}_index ON {table} ({column}).format(table=table, column=column)
+    # mycursor.execute(query)
        
 
 
