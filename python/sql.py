@@ -81,7 +81,7 @@ def check(table, key, value):
         print(x)
 
 def create_index(db, table, column):
-    query = "CREATE INDEX {column}_index ON {table} ({column})
+    query = "CREATE INDEX {column}_index ON {table} ({column}).format(table=table, column=column)
     mycursor.execute(query)
        
 
