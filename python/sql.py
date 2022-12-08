@@ -47,7 +47,15 @@ def update(table, pk, key, attribute, value):
             raise NotFoundInTableException
     except NotFoundInTableException:
         print("Cannot Update, Item Not Found")
-
+        
+def view(table, conditions, con_attributes, color):
+    conditionString = ' '.join(map(str, conditions))
+    values = []
+    mycursor.execute("CREATE VIEW"+color+"AS""SELECT"+con_attributes+"FROM"+table+"WHERE"+conditionString)
+    db.commit()
+    for i in mycursor:
+        values.append(i)
+    return values
 
 def delete(table, key, value):
 
