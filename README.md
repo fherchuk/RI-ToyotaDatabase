@@ -20,9 +20,10 @@ Steps on how to run the script along with suitable examples.
 <!--Remove the below lines and add yours -->
 Add a jpeg/png/gif file here.
 
-## *Author*
+## *Authors*
 <!--Remove the below lines and add yours -->
 #### *Frederick Herchuk* ([GitHub](https://github.com/fherchuk))
+#### *Robbie Thompson* ([GitHub](https://github.com/robbiethompson4))
 If you have a web site or a Git user name, feel free to link.
 
 <!--MARKDOWN BADGES-->
