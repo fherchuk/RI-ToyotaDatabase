@@ -1,8 +1,10 @@
+
 from cgitb import text
 import tkinter
-import sql as sql
+import sql 
 from tkinter import *
 from tkinter import ttk
+
 
 BG_COLOR = '#b0c4de'
 
@@ -21,14 +23,14 @@ class MyButton:
     def __init__(self, name, entry, row, col):
         self.name = name
         self.entry = entry
-        self.btn = Button(root,width=10,height= 2, text=self.name, command=lambda: table.clickBtn(self.name))
+        self.btn = Button(root,width=12,height= 1, text=self.name, command=lambda: table.clickBtn(self.name))
         self.btn.grid(row = row, column = col, padx=5)
 
 
 class MyLabel:
     def __init__(self, text, row, col):
         self.label = Label(root, text = text)
-        self.label.grid(row = row, column = col, columnspan = 2)
+        self.label.grid(row = row, column = col, columnspan = 2, padx=2)
         self.label.configure(bg=BG_COLOR, font=('bold',12))
     def update(self, text):
         self.label.configure(text = text)
@@ -97,8 +99,6 @@ class Table:
         self.comparison_tablebox.drop.config(font = 8)
         self.entry = EntryBox(15,2)
         self.insertentries = EntryBundle()
-        self.defaultbtn = MyButton("Default"," ",0,0)
-        self.defaultbtn.btn.config(background='lightblue', height=4)
 
     def heading(self):
         self.style.configure('Treeview.Heading', background= "lightblue2")
@@ -144,11 +144,14 @@ class Table:
     
     def clickBtn(self, name):
         entryString = "'"+self.entry.entry.get()+"'"
-        if name == "Search":
+        viewname = self.entry.entry.get()
+        if name == "Select":
             self.display(sql.select("*",table.name,[self.headerbox.selection.get(),self.comparison_tablebox.selection.get(),entryString]))
-            myLabel = Label(root, text="clicked "+self.entry.entry.get())
-            myLabel.grid(row=17, column=1)
-        elif name == "Select":
+        if name == "View":
+            sql.view(viewname,"*",table.name,[self.headerbox.selection.get(),self.comparison_tablebox.selection.get(),entryString])
+            self.display(sql.select("*",table.name,[self.headerbox.selection.get(),self.comparison_tablebox.selection.get(),entryString]))
+
+        elif name == "Populate":
             focus = self.tv.item(self.tv.focus())
             selection = []
             i = 0
@@ -218,13 +221,12 @@ def initialize():
     
     
 
-    #entryLabel = MyLabel("Enter Here:",0, 0)
-    delete = MyButton("Delete", table.entry, 16, 1)
-    search = MyButton("Select Item", table.entry, 16, 2)
+
+    delete = MyButton("Delete", table.entry, 16, 0)
+    search = MyButton("Select", table.entry, 16, 1)
     select_table = MyButton("Select Table", "",8,3)
-    select = MyButton("Select", table.entry, 28, 2)
-    viewbox = MenuBox(["Black","Blue","White","Silver"],8,0,15)
-    createview = MyButton("Create View",viewbox.selection,8,1)
+    select = MyButton("Populate", table.entry, 28, 2)
+    createview = MyButton("View",table.entry,16,2)
 
     
 

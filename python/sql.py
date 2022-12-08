@@ -48,10 +48,11 @@ def update(table, pk, key, attribute, value):
     except NotFoundInTableException:
         print("Cannot Update, Item Not Found")
         
-def view(table, conditions, con_attributes, color):
+def view(viewname,con_attributes, table ,conditions):
     conditionString = ' '.join(map(str, conditions))
     values = []
-    mycursor.execute("CREATE VIEW"+color+"AS""SELECT"+con_attributes+"FROM"+table+"WHERE"+conditionString)
+    print("CREATE VIEW "+viewname+"_"+table+" AS SELECT "+con_attributes+" FROM "+table+" WHERE "+conditionString)
+    mycursor.execute("CREATE VIEW "+viewname+"_"+table+" AS SELECT "+con_attributes+" FROM "+table+" WHERE "+conditionString)
     db.commit()
     for i in mycursor:
         values.append(i)
