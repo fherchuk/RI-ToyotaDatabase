@@ -80,8 +80,9 @@ def check(table, key, value):
     for x in myresult:
         print(x)
 
-
-        
+def create_index(db, table, column):
+    query = "CREATE INDEX {column}_index ON {table} ({column})
+    mycursor.execute(query)
        
 
 
