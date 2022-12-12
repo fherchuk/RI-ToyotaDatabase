@@ -233,3 +233,35 @@ def initialize():
 
 
     root.mainloop()
+
+
+
+
+
+    ### OLD CODE ###
+    def optionmenu_callback(choice):
+    print("optionmenu dropdown clicked:", choice)
+
+combobox = ctk.CTkComboBox(master=frame, values=["=","!",">=",">","<=","<"], command=optionmenu_callback, variable=optionmenu_var, button_color = RED_MAIN, button_hover_color = RED_HOVER)
+combobox.pack(padx=400, pady=0, anchor = tk.W)
+combobox.set("=")
+
+
+
+combobox2 = ctk.CTkComboBox(master=frame, values=["help", "option 2", "option3"], command=optionmenu_callback, variable=optionmenu_var, button_color = RED_MAIN, button_hover_color = RED_HOVER)
+combobox2.pack(padx=400, pady=0, anchor = tk.E)
+combobox2.set("Options")
+
+
+
+radio_var = tk.IntVar(0)
+def radiobutton_event():
+    print("radiobutton toggled, current value:", radio_var.get())
+
+radiobutton_1 = ctk.CTkRadioButton(master=frame, text="CTkRadioButton 1",
+                                             command=radiobutton_event, variable= radio_var, value=1)
+radiobutton_2 = ctk.CTkRadioButton(master=frame, text="CTkRadioButton 2",
+                                             command=radiobutton_event, variable= radio_var, value=2)
+
+radiobutton_1.pack(padx=20, pady=10)
+radiobutton_2.pack(padx=20, pady=10)
