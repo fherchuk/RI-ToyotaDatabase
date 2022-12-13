@@ -168,7 +168,6 @@ class Table:
 
         elif name == "Insert":
             sql.insert(table.name, self.headers, [self.insertentries.entry1.entry.get(), self.insertentries.entry2.entry.get(), self.insertentries.entry3.entry.get(), self.insertentries.entry4.entry.get(), self.insertentries.entry5.entry.get()], self.headersize)
-            self.display(sql.select("*",table.name,[self.headerbox.selection.get(),self.comparison_tablebox.selection.get(),entryString]))
             self.clickMenu()
 
         elif name == "Select Table":
