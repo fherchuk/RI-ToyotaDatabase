@@ -126,13 +126,13 @@ class Table:
             self.name="customer"
             self.headersize = 4
         elif self.tablebox.selection.get() == "Sales Representatives":
-            self.headers=["ID", "Name", "Phone"]
+            self.headers=["ID", "Name", "Phone", "Location"]
             self.name="sales_rep"
-            self.headersize = 3
+            self.headersize = 4
         elif self.tablebox.selection.get() == "Sales":
-            self.headers=["ID", "Date"]
+            self.headers=["ID", "Date", "Agent", "VIN", "Customer"]
             self.name="sales"
-            self.headersize = 2
+            self.headersize = 5
         elif self.tablebox.selection.get() == "RI Toyota":
             self.headers=["Location", "City", "Phone"]
             self.name="ri_toyota"
@@ -166,8 +166,9 @@ class Table:
             myLabel = Label(root, text="Deleted "+self.entry.entry.get())
             myLabel.grid(row=17, column=1)
 
-        elif name == "Update":
-            myLabel = Label(root, text="updated "+self.entry.get())
+        elif name == "Insert":
+            sql.insert(table.name, self.headers, [self.insertentries.entry1.entry.get(), self.insertentries.entry2.entry.get(), self.insertentries.entry3.entry.get(), self.insertentries.entry4.entry.get(), self.insertentries.entry5.entry.get()], self.headersize)
+            self.display(sql.select("*",table.name,[self.headerbox.selection.get(),self.comparison_tablebox.selection.get(),entryString]))
 
         elif name == "Select Table":
             self.clickMenu()
@@ -227,7 +228,7 @@ def initialize():
     select_table = MyButton("Select Table", "",8,3)
     select = MyButton("Populate", table.entry, 28, 2)
     createview = MyButton("View",table.entry,16,2)
-
+    insert = MyButton("Insert", table.entry, 28, 1)
     
 
 

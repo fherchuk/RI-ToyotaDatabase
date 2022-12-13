@@ -1,7 +1,7 @@
 from asyncio.windows_events import NULL
 from logging import exception
 import mysql.connector
-db = mysql.connector.connect(host='localhost', password= 'ebviking07', user= 'root', database = 'toyota')
+db = mysql.connector.connect(host='localhost', password= 'default', user= 'root', database = 'toyota')
 mycursor = db.cursor()
 
 class Error(Exception):
@@ -26,13 +26,19 @@ def select(con_attributes, table ,conditions):
     return values
 
 
-def insert(table, attributes, values):
+def insert(table, attributes, values, headersize):
+    fixed_values = []
     stringFormatting = []
-    for i in attributes:
+    i = 0
+    while i < headersize:
         stringFormatting.append('%s')
-    attributeString = ','.join(map(str,attributes))
+        fixed_values.append(values[i])
+        print(fixed_values)
+        i+=1
+    attributeString = ','.join(map(str, attributes))
+
     valuesString = ','.join(map(str,stringFormatting))
-    print("INSERT INTO "+table+" ("+attributeString+") VALUES ("+(valuesString)+")",(values))
+    print("INSERT INTO "+table+" ("+attributeString+") VALUES ("+(valuesString)+");",(fixed_values))
     try:
         # set foreign key checks to 0 in order to insert to table
         # mycursor.execute("SET FOREIGN_KEY_CHECKS = 0;")
