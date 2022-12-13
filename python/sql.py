@@ -1,7 +1,7 @@
 from asyncio.windows_events import NULL
 from logging import exception
 import mysql.connector
-db = mysql.connector.connect(host='localhost', password= 'default', user= 'root', database = 'toyota')
+db = mysql.connector.connect(host='localhost', password= 'ebviking07', user= 'root', database = 'toyota')
 mycursor = db.cursor()
 
 class Error(Exception):
@@ -34,7 +34,11 @@ def insert(table, attributes, values):
     valuesString = ','.join(map(str,stringFormatting))
     print("INSERT INTO "+table+" ("+attributeString+") VALUES ("+(valuesString)+")",(values))
     try:
+        # set foreign key checks to 0 in order to insert to table
+        # mycursor.execute("SET FOREIGN_KEY_CHECKS = 0;")
         mycursor.execute("INSERT INTO "+table+" ("+attributeString+") VALUES ("+(valuesString)+")",(values))
+        # enable foreign key checks after item is inserted into table
+        # mycursor.execute("SET FOREIGN_KEY_CHECKS = 1;")
         db.commit()
     except:
         print("Already Exists")
@@ -42,7 +46,13 @@ def insert(table, attributes, values):
 def update(table, pk, key, attribute, value):
     try:
         if check(table, pk, key):
+            values = []
             print("UPDATE "+table+" SET "+attribute+" = %s  WHERE "+pk+" = %s;",(value, key))
+            mycursor.execute("UPDATE "+table+" SET "+attribute+" = %s  WHERE "+pk+" = %s;",(value, key))
+            db.commit()
+            for i in mycursor:
+                values.append(i)
+            return values
         else:
             raise NotFoundInTableException
     except NotFoundInTableException:
@@ -86,7 +96,17 @@ def check(table, key, value):
     for x in myresult:
         print(x)
 
-# comment out "create index" to avoid errors on compile
+def create_index(table, column, index):
+    try:
+        mycursor.execute("CREATE INDEX {} ON {} ({})".format(index, table, column))
+        sqlShowIndexes = "show index from "+table+""
+        mycursor.execute(sqlShowIndexes)
+        indexList = mycursor.fetchall()
+        print(indexList)
+
+    except Exception as e:
+        print("Exception occured:{}".format(e))
+
 # def create_index(db, table, column):
     # query = "CREATE INDEX {column}_index ON {table} ({column}).format(table=table, column=column)
     # mycursor.execute(query)
