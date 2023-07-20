@@ -1,7 +1,7 @@
 ![](https://img.shields.io/badge/created-november%202022-blue)
 ![GitHub last commit](https://img.shields.io/github/last-commit/fherchuk/CSC436-Database-Project)
 
-# CSC436-Database-Project
+# RI Toyota Database
 A short description about the script must be mentioned here.
 
 ### Prerequisites
